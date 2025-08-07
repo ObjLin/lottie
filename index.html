@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lottie动画示例</title>
+    <style>
+        .lottie-container {
+            width: 200px;
+            height: 200px;
+            cursor: pointer;
+            display: inline-block;
+            margin: 10px;
+        }
+
+        #animations-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 创建一个容器来放置所有Lottie动画 -->
+    <div id="animations-wrapper"></div>
+
+    <!-- 引入Lottie库 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.9.6/lottie.min.js"></script>
+
+    <script>
+        // 将所有动画路径存储在数组中
+        const animationPaths = [
+            'https://assets5.lottiefiles.com/packages/lf20_UJNc2t.json',
+            'https://rewards.bing.com/rewardscdn/images/rewards/membercenter/missions/Animated-Icons/puzzle.json',
+            'https://rewards.bing.com/rewardscdn/images/rewards/membercenter/missions/Animated-UI/Streak_TreasureChest.json',
+            'https://rewards.bing.com/rewardscdn/images/rewards/membercenter/missions/Animated-UI/Streak_Status_3.json',
+            'https://hostme.blob.core.windows.net/images/rewards/membercenter/missions/Animated-Icons/soccerBall.json',
+            'https://rewards.bing.com/rewardscdn/images/rewards/membercenter/missions/Animated-Icons/Tiger_Tile.json',
+            'https://rewards.bing.com/rewardscdn/images/rewards/membercenter/missions/Animated-Icons/MoonStars_Tile.json',
+            'https://rewards.bing.com/rewardscdn/images/rewards/membercenter/missions/Animated-Icons/wallet.json',
+            'https://rewards.bing.com/rewardscdn/images/rewards/membercenter/missions/Animated-Icons/nightSky.json',
+            'https://rewards.bing.com/rewardscdn/images/rewards/membercenter/missions/Animated-Icons/surfboard.json',
+            'https://rewards.bing.com/rewardscdn/images/rewards/membercenter/missions/Animated-Icons/MusicNote.json',
+            'https://rewards.bing.com/rewardscdn/images/rewards/membercenter/missions/Animated-Icons/forkKnifeSpoon.json',
+            'https://hostme.blob.core.windows.net/images/rewards/membercenter/missions/Animated-Icons/Giftbox.json',
+            'https://hostme.blob.core.windows.net/images/rewards/membercenter/missions/Animated-Icons/mountain.json',
+            'https://hostme.blob.core.windows.net/images/rewards/membercenter/missions/Animated-Icons/Science_Tile.json',
+            'https://hostme.blob.core.windows.net/images/rewards/membercenter/missions/Animated-Icons/Yoga_Tile.json',
+            'https://hostme.blob.core.windows.net/images/rewards/membercenter/missions/Animated-Icons/Search.json',
+            'https://hostme.blob.core.windows.net/images/rewards/membercenter/missions/Animated-Icons/city.json',
+            'https://hostme.blob.core.windows.net/images/rewards/membercenter/missions/Animated-Icons/Tree_Tile.json',
+            'https://hostme.blob.core.windows.net/images/rewards/membercenter/missions/Animated-Icons/workOut.json',
+            'https://hostme.blob.core.windows.net/images/rewards/membercenter/missions/Animated-Icons/QuestionMark.json',
+            'https://hostme.blob.core.windows.net/images/rewards/membercenter/missions/Animated-Icons/Beach_Tile.json',
+            'https://hostme.blob.core.windows.net/images/rewards/membercenter/missions/Animated-Icons/Camera.json',
+            'https://hostme.blob.core.windows.net/images/rewards/membercenter/missions/Animated-Icons/quoteBubble.json',
+            'https://hostme.blob.core.windows.net/images/rewards/membercenter/missions/Animated-Icons/Space_Tile.json',
+            'https://hostme.blob.core.windows.net/images/rewards/membercenter/missions/Animated-Icons/Flower_Tile.json',
+            'https://hostme.blob.core.windows.net/images/rewards/membercenter/missions/Animated-Icons/mapPin.json',
+            'https://hostme.blob.core.windows.net/images/rewards/membercenter/missions/Animated-Icons/pie.json',
+            'https://hostme.blob.core.windows.net/images/rewards/membercenter/missions/Animated-Icons/Seahorse_Tile.json',
+            'https://hostme.blob.core.windows.net/images/rewards/membercenter/missions/Animated-Icons/robot.json',
+            'https://hostme.blob.core.windows.net/images/rewards/membercenter/missions/Animated-Icons/TNC_Sweeps.json',
+            'https://hostme.blob.core.windows.net/images/rewards/membercenter/missions/Animated-Icons/rewardsMedal.json',
+            'https://hostme.blob.core.windows.net/images/rewards/membercenter/missions/Animated-Icons/snowflakes.json',
+            'https://hostme.blob.core.windows.net/images/rewards/membercenter/missions/Animated-Icons/Heart.json',
+            'https://hostme.blob.core.windows.net/images/rewards/membercenter/missions/Animated-Icons/shoppingCart.json',
+            'https://hostme.blob.core.windows.net/images/rewards/membercenter/missions/Animated-Icons/Trophy.json',
+            'https://hostme.blob.core.windows.net/images/rewards/membercenter/missions/Animated-Icons/StatusHeaderLeft.json',
+            'https://hostme.blob.core.windows.net/images/rewards/membercenter/missions/Animated-Icons/StatusHeaderRight.json',
+            'https://hostme.blob.core.windows.net/images/rewards/membercenter/missions/Animated-Icons/RewardsMedal.json',
+            'https://hostme.blob.core.windows.net/images/rewards/membercenter/missions/Animated-Icons/airplane.json',
+            'https://hostme.blob.core.windows.net/images/rewards/membercenter/missions/Animated-Icons/book.json',
+            'https://hostme.blob.core.windows.net/images/rewards/membercenter/missions/Animated-Icons/food.json',
+            'https://hostme.blob.core.windows.net/images/rewards/membercenter/missions/Animated-Icons/Family_Tile.json',
+            'https://hostme.blob.core.windows.net/images/rewards/membercenter/missions/Animated-Icons/Lightbulb_Tile.json',
+            'https://hostme.blob.core.windows.net/images/rewards/membercenter/missions/Animated-Icons/laptop.json',
+            'https://hostme.blob.core.windows.net/images/rewards/membercenter/missions/Animated-Icons/HotCold_Tile.json',
+            'https://hostme.blob.core.windows.net/images/rewards/membercenter/missions/Animated-Icons/world.json',
+            'https://hostme.blob.core.windows.net/images/rewards/membercenter/missions/Animated-Icons/paint.json',
+            'https://hostme.blob.core.windows.net/images/rewards/membercenter/missions/Animated-Icons/healthyFood.json',
+            'https://hostme.blob.core.windows.net/images/rewards/membercenter/missions/Animated-Icons/SoftwareEngineer_Tile.json',
+            'https://hostme.blob.core.windows.net/images/rewards/membercenter/missions/Animated-Icons/pencil.json',
+            'https://hostme.blob.core.windows.net/images/rewards/membercenter/missions/Animated-Icons/quest.json',
+            'https://hostme.blob.core.windows.net/images/rewards/membercenter/missions/Animated-Icons/GenericTips_Tile.json',
+            'https://hostme.blob.core.windows.net/images/rewards/membercenter/missions/Animated-Icons/summerSun.json',
+            'https://hostme.blob.core.windows.net/images/rewards/membercenter/missions/Animated-Icons/Food_Tile.json',
+            'https://hostme.blob.core.windows.net/images/rewards/membercenter/missions/Animated-Icons/Coffee.json',
+            'https://hostme.blob.core.windows.net/images/rewards/membercenter/missions/Animated-Icons/waves.json',
+            'https://hostme.blob.core.windows.net/images/rewards/membercenter/missions/Animated-Icons/springFlower.json',
+            'https://hostme.blob.core.windows.net/images/rewards/membercenter/missions/Animated-Icons/cricket.json',
+            'https://hostme.blob.core.windows.net/images/rewards/membercenter/missions/Animated-Icons/Clapperboard.json',
+            'https://rewards.bing.com/rewardscdn/images/rewards/membercenter/missions/Animated-Icons/cat.json',
+            'https://rewards.bing.com/rewardscdn/images/rewards/membercenter/missions/Animated-Icons/calculator.json',
+            'https://rewards.bing.com/rewardscdn/images/rewards/membercenter/missions/Animated-Icons/Gadget_Tile.json',
+            'https://rewards.bing.com/rewardscdn/images/rewards/membercenter/missions/Animated-Icons/XboxLogo.json',
+            'https://rewards.bing.com/rewardscdn/images/rewards/membercenter/missions/Animated-Icons/cloud.json',
+            'https://rewards.bing.com/rewardscdn/images/rewards/membercenter/missions/Animated-Icons/foodAndDrink.json',
+            'https://rewards.bing.com/rewardscdn/images/rewards/membercenter/missions/Animated-Icons/dog.json',
+            'https://rewards.bing.com/rewardscdn/images/rewards/membercenter/missions/Animated-Icons/Megaphone.json',
+            'https://rewards.bing.com/rewardscdn/images/rewards/membercenter/missions/Animated-Icons/scavengerHunt.json',
+            'https://rewards.bing.com/rewardscdn/images/rewards/membercenter/missions/Animated-Icons/Exercise_Tile.json',
+            'https://rewards.bing.com/rewardscdn/images/rewards/membercenter/missions/Animated-Icons/XboxController.json',
+            'https://rewards.bing.com/rewardscdn/images/rewards/membercenter/missions/Animated-Icons/TimeUrgent.json',
+            'https://rewards.bing.com/rewardscdn/images/rewards/membercenter/missions/Animated-Icons/Globe.json',
+            'https://rewards.bing.com/rewardscdn/images/rewards/membercenter/missions/Animated-Icons/Hollywood_Tile.json',
+            'https://rewards.bing.com/rewardscdn/images/rewards/membercenter/missions/Animated-Icons/car.json',
+            'https://rewards.bing.com/rewardscdn/images/rewards/membercenter/missions/Animated-Icons/Star.json',
+            'https://rewards.bing.com/rewardscdn/images/rewards/membercenter/missions/Animated-Icons/SpringSale.json',
+        ];
+
+        // 获取动画容器元素
+        const wrapper = document.getElementById('animations-wrapper');
+        // 循环遍历动画路径数组，为每个动画创建一个容器
+        animationPaths.forEach((path, index) => {
+            // 创建容器元素
+            const container = document.createElement('div');
+            container.className = 'lottie-container';
+            container.id = `lottie-container-${index}`;
+            wrapper.appendChild(container);
+
+            // 初始化Lottie动画
+            const animation = lottie.loadAnimation({
+                container: container, // 动画容器
+                renderer: 'svg', // 渲染器类型
+                loop: false, // 不循环播放
+                autoplay: false, // 初始不自动播放
+                path: path // 动画JSON文件路径
+            });
+
+            // 添加鼠标悬停事件监听器
+            container.addEventListener('mouseenter', () => {
+                animation.goToAndPlay(0, true); // 鼠标悬停时播放动画
+            });
+
+            // 添加鼠标移出事件监听器
+            container.addEventListener('mouseleave', () => {
+                animation.pause(); // 鼠标移出时暂停动画
+            });
+        });
+    </script>
+</body>
+
+</html>
